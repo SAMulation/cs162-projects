@@ -15,18 +15,32 @@
 using namespace std;
 
 const int MAX = 9;
-const string VALID = "rksyRKSY";
+const int ROWBOAT_NUM = 1;
+const int KAYAK_NUM = 2;
+const int SKIBOAT_NUM = 3;
+const int YACHT_NUM = 4;
+const int ROWBOAT_SUNK = 2;
+const int KAYAK_SUNK = 3;
+const int SKIBOAT_SUNK = 4;
+const int YACHT_SUNK = 5;
 
 int rand_num();
+void fill_array(int[][MAX]);
+void find_spot(int[][MAX], int, int);
 void print_board(int[][MAX], int, int, int[]);
 char print_ship(int);
+void print_array(int[][MAX]);
 
 int main() {
     int board[MAX][MAX] = {0};
     int last[] = {0, 0};
     srand(time(NULL));
 
+    fill_array(board);
+
     print_board(board, MAX, MAX, last);
+
+    print_array(board);
     
     return 0;
 }
@@ -34,6 +48,56 @@ int main() {
 int rand_num() {
     return rand() % MAX;
 }
+
+void fill_array(int arr[][MAX]) {
+    find_spot(arr, ROWBOAT_NUM, ROWBOAT_SUNK); // rowboat
+    find_spot(arr, KAYAK_NUM, KAYAK_SUNK); // kayak
+    find_spot(arr, SKIBOAT_NUM, SKIBOAT_SUNK); // skiboat
+    find_spot(arr, YACHT_NUM, YACHT_SUNK); // yacht
+    return;
+}
+
+void find_spot(int arr[][MAX], int code, int size) {
+    bool valid;
+    int flip; // 0 (right) or 1 (down)
+    int r; // Starting row
+    int c; // Starting column
+    int start;
+
+    // Test ship placement
+    do {
+        valid = true;
+        flip = rand() % 2;
+        r = rand_num(); // Starting row
+        c = rand_num(); // Starting column
+        
+        if (flip == 1)
+            start = r;
+        else
+            start = c;
+
+        for (int i = start; i < start + size && valid; i++) {
+            if (i > size)
+                valid = false;
+            // Something is there
+            if (valid && (flip == 1 && arr[i][c] != 0) || (flip == 0 && arr[r][i]))
+                valid = false;
+            // else: keep checking
+        }
+
+        // cout << "code: " << code << " start: " << start << " flip: " << flip << " valid: " << valid << " size: " << size << endl;
+    } while (!valid);
+
+    // Actually place ship
+    for (int i = start; i < start + size; i++)
+        if (flip == 1)
+            arr[i][c] = code;
+        else
+            arr[r][i] = code;
+
+    return;
+}
+
 
 void print_board(int arr[][MAX], int r, int c, int last[]) {
     // last is an array of [last_row, last_col]
@@ -54,16 +118,27 @@ void print_board(int arr[][MAX], int r, int c, int last[]) {
         }
         cout << endl;
     }
+    return;
 }
 
 char print_ship(int x) {
-    char c = 'Y';
-    if (x == 11)
+    char c = 'Y'; // Defaulting to yacht
+    if (x == ROWBOAT_NUM + 10)
         c = 'R';
-    else if (x == 12)
+    else if (x == KAYAK_NUM + 10)
         c = 'K';
-    else if (x == 13)
+    else if (x == SKIBOAT_NUM + 10)
         c = 'S';
 
     return c;
+}
+
+void print_array(int arr[][MAX]) {
+    for (int i = 0; i < MAX; i++) {
+        cout << '|';
+        for (int j = 0; j< MAX; j++)
+            cout << arr[i][j] << '|';
+        cout << endl;
+    }
+    return;
 }
