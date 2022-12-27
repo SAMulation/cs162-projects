@@ -60,21 +60,22 @@ bool game_logic() {
     // Start by filling board
     fill_array(board);
 
-    print_array(board);
+    // print_array(board);
 
     // Initial print board
     print_board(board, MAX, MAX, last);
 
     do {
         turns++;
-        valid = true;
         do {
+            valid = true;
+            row = col = -1;
             cout << "Pick coordinates separated by a space (e.g., '1 2') ";
             do {
                 cin >> row >> col;
             } while (row < 1 || row > MAX || col < 1 || col > MAX);
 
-            if (board[row][col] < 0 || board[row][col] > 5) {
+            if (board[row - 1][col - 1] < 0 || board[row - 1][col - 1] > 5) {
                 cout << "Invalid choice... Try again!" << endl;
                 valid = false;
             }
@@ -126,7 +127,7 @@ void hit_ship(int code, int hits[]) {
 
     hits[code]++;
     hits[0]++; // Increment total
-    
+
     if (hits[code] == MAX_HITS[code])
         cout << "You sunk my " << ship_name << "!!!" << endl;
 
