@@ -30,19 +30,46 @@ void find_spot(int[][MAX], int, int);
 void print_board(int[][MAX], int, int, int[]);
 char print_ship(int);
 void print_array(int[][MAX]);
+bool game_logic();
 
 int main() {
-    int board[MAX][MAX] = {0};
-    int last[] = {0, 0};
+    bool again = true;
     srand(time(NULL));
 
-    fill_array(board);
-
-    print_board(board, MAX, MAX, last);
-
-    print_array(board);
+    do {
+        again = game_logic();
+    } while (again);
     
     return 0;
+}
+
+bool game_logic() {
+    const int WIN_HITS = ROWBOAT_SUNK + KAYAK_SUNK + SKIBOAT_SUNK + YACHT_SUNK;
+    const int MAX_HITS[] = {WIN_HITS, ROWBOAT_SUNK, KAYAK_SUNK, SKIBOAT_SUNK, YACHT_SUNK}; // Max hits
+    int board[MAX][MAX] = {0};
+    int last[] = {-1, -1};
+    int ships_left = 4;
+    int hits[5] = {0}; // Current hits
+    int turns = 0;
+
+    // Start by filling board
+    fill_array(board);
+
+    // Initial print board
+    print_board(board, MAX, MAX, last);
+
+    do {
+        turns++;
+        print_board(board, MAX, MAX, last);
+    } while (hits[0] != WIN_HITS);
+
+    // print_board(board, MAX, MAX, last);
+
+    // print_array(board);
+
+
+
+
 }
 
 int rand_num() {
@@ -101,20 +128,29 @@ void find_spot(int arr[][MAX], int code, int size) {
 
 void print_board(int arr[][MAX], int r, int c, int last[]) {
     // last is an array of [last_row, last_col]
-    for (int i = 0; i < r; i++) {
-        cout << "|";
+    for (int i = 0; i <= r; i++) {
+        if (i != r)
+            cout << (i + 1) << " |";
+        else
+            cout << "  |";
+
         for (int j = 0; j < c; j++) {
             char show = ' ';
-            // Last hit, show X
-            if (i == last[0] && j == last[1])
-                show = 'X';
-            // It's a ship that's been hit
-            else if (arr[i][j] > 10)
-                show = print_ship(arr[i][j]);
-            // Not a ship, been tried
-            else if (arr[i][j] == -1)
-                show = '-';
-            cout << ' ' << show << " |";
+            // Last row, display columns
+            if (i == r)
+                cout << ' ' << (j + 1) << " |";
+            else {
+                // Last hit, show X
+                if (i == last[0] && j == last[1])
+                    show = 'X';
+                // It's a ship that's been hit
+                else if (arr[i][j] > 10)
+                    show = print_ship(arr[i][j]);
+                // Not a ship, been tried
+                else if (arr[i][j] == -1)
+                    show = '-';
+                cout << ' ' << show << " |";
+            }
         }
         cout << endl;
     }
