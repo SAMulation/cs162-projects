@@ -23,6 +23,8 @@ const int ROWBOAT_SUNK = 2;
 const int KAYAK_SUNK = 3;
 const int SKIBOAT_SUNK = 4;
 const int YACHT_SUNK = 5;
+const int WIN_HITS = ROWBOAT_SUNK + KAYAK_SUNK + SKIBOAT_SUNK + YACHT_SUNK;
+const int MAX_HITS[] = {WIN_HITS, ROWBOAT_SUNK, KAYAK_SUNK, SKIBOAT_SUNK, YACHT_SUNK}; // Max hits
 
 int rand_num();
 void fill_array(int[][MAX]);
@@ -30,6 +32,8 @@ void find_spot(int[][MAX], int, int);
 void print_board(int[][MAX], int, int, int[]);
 char print_ship(int);
 void print_array(int[][MAX]);
+void apply_shot(int[][MAX], int, int, int[]);
+void hit_ship(int, int[]);
 bool game_logic();
 
 int main() {
@@ -44,32 +48,89 @@ int main() {
 }
 
 bool game_logic() {
-    const int WIN_HITS = ROWBOAT_SUNK + KAYAK_SUNK + SKIBOAT_SUNK + YACHT_SUNK;
-    const int MAX_HITS[] = {WIN_HITS, ROWBOAT_SUNK, KAYAK_SUNK, SKIBOAT_SUNK, YACHT_SUNK}; // Max hits
     int board[MAX][MAX] = {0};
     int last[] = {-1, -1};
     int ships_left = 4;
     int hits[5] = {0}; // Current hits
     int turns = 0;
+    bool valid;
+    int row, col;
+    char again;
 
     // Start by filling board
     fill_array(board);
+
+    print_array(board);
 
     // Initial print board
     print_board(board, MAX, MAX, last);
 
     do {
         turns++;
+        valid = true;
+        do {
+            cout << "Pick coordinates separated by a space (e.g., '1 2') ";
+            do {
+                cin >> row >> col;
+            } while (row < 1 || row > MAX || col < 1 || col > MAX);
+
+            if (board[row][col] < 0 || board[row][col] > 5) {
+                cout << "Invalid choice... Try again!" << endl;
+                valid = false;
+            }
+        } while (!valid);
+
+
+        last[0] = row - 1;
+        last[1] = col - 1;
         print_board(board, MAX, MAX, last);
+        apply_shot(board, row - 1, col - 1, hits);
     } while (hits[0] != WIN_HITS);
 
-    // print_board(board, MAX, MAX, last);
+    cout << "You won in " << turns << " turns!!!" << endl
+         << "To play again, type 'y': ";
+    cin >> again;
 
-    // print_array(board);
+    return again == 'y';
+}
 
+void apply_shot(int arr[][MAX], int r, int c, int hits[]) {
+    // Miss
+    if (arr[r][c] == 0) {
+        cout << "Nothing...";
+        arr[r][c] = -1;
+    }
+    else {
+        hit_ship(arr[r][c], hits);
+        arr[r][c] += 10;
+    }
 
+    cout << endl;
 
+    return;
+}
 
+void hit_ship(int code, int hits[]) {
+    string ship_name;
+
+    cout << "You hit my ";
+    if (code == 1)
+        ship_name = "rowboat";
+    else if (code == 2)
+        ship_name = "kayak";
+    else if (code == 3)
+        ship_name = "skiboat";
+    else
+        ship_name = "yacht";
+    cout << ship_name << "!" << endl;
+
+    hits[code]++;
+    hits[0]++; // Increment total
+    
+    if (hits[code] == MAX_HITS[code])
+        cout << "You sunk my " << ship_name << "!!!" << endl;
+
+    return;
 }
 
 int rand_num() {
