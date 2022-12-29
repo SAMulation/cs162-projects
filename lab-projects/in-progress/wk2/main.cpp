@@ -23,6 +23,7 @@ struct Book
 
 void print_book(Book);
 void get_book(Book&);
+void author_fix(Book&);
 
 int main() {
     Book book1 = {
@@ -36,9 +37,20 @@ int main() {
 
     Book book2;
 
+    cout << "Please enter detail's for the second book..." << endl;
     get_book(book2);
 
+    cout << "Here's the first book:" << endl;
     print_book(book1);
+
+    
+    cout << "Here's the second book:" << endl;
+    print_book(book2);
+
+    author_fix(book2);
+
+
+    cout << "Here's the second book, fixed:" << endl;
     print_book(book2);
     
     return 0;
@@ -59,17 +71,33 @@ void print_book(Book b)
 void get_book(Book& b)
 {
     cout << "Title: "; 
-    cin >> b.title;
+    getline(cin, b.title);
     cout << "Author's first name: ";
-    cin >> b.author_first;
+    getline(cin, b.author_first);
     cout << "Author's last name: ";
-    cin >> b.author_last;
+    getline(cin, b.author_last);
     cout << "Publish Year: ";
     cin >> b.pub_year;
+    cin.ignore(80, '\n');
     cout << "Genre: "; 
-    cin >> b.genre;
+    getline(cin, b.genre);
     cout << "Price: "; 
     cin >> b.price;
+    cin.ignore(80, '\n');
+
+    cout << endl;
+
+    return;
+}
+
+void author_fix(Book& b)
+{
+    cout << "That is not the right author! Please fix..." << endl << endl;
+
+    cout << "Author's first name: ";
+    getline(cin, b.author_first);
+    cout << "Author's last name: ";
+    getline(cin, b.author_last);
 
     cout << endl;
 
