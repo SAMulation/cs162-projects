@@ -75,11 +75,12 @@ float get_perimeter(Point points[])
     for (int i = 0; i < 3; i++) {
         int delta_x = points[(i + 1) % 3].x - points[i].x;
         int delta_y = points[(i + 1) % 3].y - points[i].y;
-        // cout << "sqrt(" << pow(delta_x, 2.0) + pow(delta_y, 2.0) << ")" << endl;
+        cout << "delta_x: " << delta_x << " delta_y: " << delta_y << endl;
+        cout << "sqrt(" << pow(delta_x, 2.0) + pow(delta_y, 2.0) << ")" << endl;
         float length = sqrt(pow(delta_x, 2.0) + pow(delta_y, 2.0));
-        // cout << "length: " << length << endl;
+        cout << "length: " << length << endl;
         perimeter += length;
-        // cout << "perimeter: " << perimeter << endl;
+        cout << "perimeter: " << perimeter << endl;
     }
 
     return perimeter;
