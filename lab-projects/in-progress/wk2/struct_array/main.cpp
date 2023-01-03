@@ -1,8 +1,8 @@
 /*************************
- * Name: Book Structures
+ * Name: 2-D Coordinate Triangle Perimeter
  * Author: Sam Sarsten
  * Date: 01-02-2023
- * Purpose: Compute teh perimeter of a triangle placed
+ * Purpose: Compute the perimeter of a triangle placed
  *          on a two-dimensional grid.
  * 
 **************************/

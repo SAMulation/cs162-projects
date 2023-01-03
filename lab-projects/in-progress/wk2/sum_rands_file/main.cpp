@@ -1,3 +1,12 @@
+/*************************
+ * Name: Random Number Files
+ * Author: Sam Sarsten
+ * Date: 01-02-2022
+ * Purpose: Practicing reading from and adding to files in C++
+ * 
+**************************/
+
+
 #include <iostream>
 #include <fstream>
 #include <cstdlib>
