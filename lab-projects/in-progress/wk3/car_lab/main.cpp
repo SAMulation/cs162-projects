@@ -3,7 +3,6 @@
  * Author: Sam Sarsten
  * Date: 01-03-2022
  * Purpose: Implementing Car class using C++
- * 
 **************************/
 
 #include <iostream>
