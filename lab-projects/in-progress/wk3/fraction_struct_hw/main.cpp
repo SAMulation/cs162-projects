@@ -52,6 +52,8 @@ void input_fraction(Fraction& f)
         cin >> denominator;
     }
     f.denominator = denominator;
+
+    return;
 }
 
 // Returns decimal value of fraction
@@ -72,4 +74,6 @@ bool repeat_program() {
 void display_fraction(const Fraction& f, float d) {
     cout << "Fraction: " << f.numerator << "/" << f.denominator << endl;
     cout << "Decimal equivalent: " << d << endl;
+
+    return;
 }
