@@ -1,8 +1,8 @@
 /*************************
- * Name: Fraction Struct
+ * Name: Game using structs
  * Author: Sam Sarsten
  * Date: 01-08-2022
- * Purpose: Implementing Fraction struct using C++
+ * Purpose: Implementing a number guessing game using structs
 **************************/
 
 #include <iostream>

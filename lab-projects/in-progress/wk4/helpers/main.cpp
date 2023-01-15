@@ -110,21 +110,25 @@ void Employee::set_first(const string& f)
 {
     if (Employee::validate_name(f))
         first = f;
+    return;
 }
 void Employee::set_last(const string& l)
 {
     if (Employee::validate_name(l))
         last = l;
+    return;
 }
 void Employee::set_email(const string& e)
 {
     if (Employee::validate_email(e))
         email = e;
+    return;
 }
 void Employee::set_phone(const string& p)
 {
     if (Employee::validate_phone(p))
         phone = p;
+    return;
 }
 
 // Helper functions

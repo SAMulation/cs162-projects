@@ -28,20 +28,24 @@ int Date::get_year() const {
 // Mutator functions
 void Date::set_month(int m) {
     month = m;
+    return;
 }
 
 void Date::set_day(int d) {
     day = d;
+    return;
 }
 
 void Date::set_year(int y) {
     year = y;
+    return;
 }
 
 void Date::set_date(int m, int d, int y) {
     month = m;
     day = d;
     year = y;
+    return;
 }
 
 // Other functions
