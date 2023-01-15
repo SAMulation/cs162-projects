@@ -1,9 +1,3 @@
-// Write a program to create objects that can be used in a game. You are free to be creative about 
-// what objects you create and how they are used, but your program MUST contain the following: 
-// • at least 2 defined structures, each with at least 2 member variables 
-// • at least one array that is a member of one of the structures 
-// • an array of each structure used in the program 
-
 /*************************
  * Name: Fraction Struct
  * Author: Sam Sarsten

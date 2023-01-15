@@ -24,7 +24,7 @@ class Car {
         Car() : make(""), model(""), number_doors(0), number_passengers(0), year(0) {}
 
         // Constructor with arguments
-        Car(const string& mk, const string& md, int nd, int np, int y)
+        Car(string mk, string md, int nd, int np, int y)
         : make(mk), model(md), number_doors(nd), number_passengers(np), year(y) {}
 
         // Accessor functions
@@ -45,7 +45,7 @@ class Car {
 int main()
 {
     Car my_mustang;  // Create Car object with default constructor
-    Car my_camaro("Chevrolet", "Camaro", 2, 2, 2023); // Create Car oject with other constructor
+    Car my_camaro("Chevrolet", "Camaro", 2, 2, 2023); // Create Car object with other constructor
 
     // Set the member variables using the mutator functions
     my_mustang.setMake("Ford");
