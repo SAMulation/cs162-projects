@@ -49,44 +49,6 @@ class Employee {
         bool validate_phone(const string& p) const;
 };
 
-int main()
-{
-    Employee employee1;  // Create Employee object with default constructor
-    Employee employee2("Barker", "alice.barker@gmail.com"); // Create Employee object with other constructor
-
-    // Set the member variables using the mutator functions
-    employee1.set_first("John");
-    employee1.set_last("Smith");
-    employee1.set_email("john.smith@yahoo.com");
-    employee1.set_phone("5415551234");
-    employee2.set_first("Alice");
-    employee2.set_phone("5035551234");
-
-    // Set the member variables using the mutator functions with invalid input
-    // None of these values should be set
-    employee2.set_first("John123");
-    employee2.set_last("Smith123");
-    employee2.set_email("johnsmith@yahoocom");
-    employee2.set_email("john.smith@yahoocom");
-    employee2.set_email("john.smith.yahoo.com");
-    employee2.set_phone("54155512341");
-
-    // Get the member variables using the accessor functions and print them
-    cout << left;
-    cout << "Employee 1 (John Smith, john.smith@yahoo.com, 5415551234)" << endl << "----------" << endl;
-    cout << setw(22) << "Name: " << employee1.get_first() << " " << employee1.get_last() << endl;
-    cout << setw(22) << "Email: " << employee1.get_email() << endl;
-    cout << setw(22) << "Phone: " << employee1.get_phone() << endl;
-    cout << endl;
-    cout << "Employee 2 (Alice Barker, alice.barker@gmail.com, 5035551234)" << endl << "---------" << endl;
-    cout << setw(22) << "Name: " << employee2.get_first() << " " << employee2.get_last() << endl;
-    cout << setw(22) << "Email: " << employee2.get_email() << endl;
-    cout << setw(22) << "Phone: " << employee2.get_phone() << endl;
-    cout << "*** Notice that Alice's info was not updated with invalid input ***" << endl;
-
-    return 0;
-}
-
 // Default constructor
 Employee::Employee()
 {
@@ -211,4 +173,42 @@ bool Employee::validate_phone(const string& p) const
         validPhone = validate_num(p);
 
     return validPhone;
+}
+
+int main()
+{
+    Employee employee1;  // Create Employee object with default constructor
+    Employee employee2("Barker", "alice.barker@gmail.com"); // Create Employee object with other constructor
+
+    // Set the member variables using the mutator functions
+    employee1.set_first("John");
+    employee1.set_last("Smith");
+    employee1.set_email("john.smith@yahoo.com");
+    employee1.set_phone("5415551234");
+    employee2.set_first("Alice");
+    employee2.set_phone("5035551234");
+
+    // Set the member variables using the mutator functions with invalid input
+    // None of these values should be set
+    employee2.set_first("John123");
+    employee2.set_last("Smith123");
+    employee2.set_email("johnsmith@yahoocom");
+    employee2.set_email("john.smith@yahoocom");
+    employee2.set_email("john.smith.yahoo.com");
+    employee2.set_phone("54155512341");
+
+    // Get the member variables using the accessor functions and print them
+    cout << left;
+    cout << "Employee 1 (John Smith, john.smith@yahoo.com, 5415551234)" << endl << "----------" << endl;
+    cout << setw(22) << "Name: " << employee1.get_first() << " " << employee1.get_last() << endl;
+    cout << setw(22) << "Email: " << employee1.get_email() << endl;
+    cout << setw(22) << "Phone: " << employee1.get_phone() << endl;
+    cout << endl;
+    cout << "Employee 2 (Alice Barker, alice.barker@gmail.com, 5035551234)" << endl << "---------" << endl;
+    cout << setw(22) << "Name: " << employee2.get_first() << " " << employee2.get_last() << endl;
+    cout << setw(22) << "Email: " << employee2.get_email() << endl;
+    cout << setw(22) << "Phone: " << employee2.get_phone() << endl;
+    cout << "*** Notice that Alice's info was not updated with invalid input ***" << endl;
+
+    return 0;
 }
