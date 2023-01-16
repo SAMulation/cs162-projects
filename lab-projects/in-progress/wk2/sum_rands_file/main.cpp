@@ -1,9 +1,8 @@
 /*************************
  * Name: Random Number Files
  * Author: Sam Sarsten
- * Date: 01-02-2022
+ * Date: 01-02-2023
  * Purpose: Practicing reading from and adding to files in C++
- * 
 **************************/
 
 

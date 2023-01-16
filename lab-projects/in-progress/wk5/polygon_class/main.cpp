@@ -1,7 +1,7 @@
 /*************************
  * Name: Polygon class
  * Author: Sam Sarsten
- * Date: 01-14-2022
+ * Date: 01-14-2023
  * Purpose: Implementing Polygon class using C++
  * IMPORTANT: YOU MUST USE THIS COMMAND TO RUN IN VS CODE
  * g++ main.cpp polygon.cpp -o main && "PATH_TO_MAIN"main

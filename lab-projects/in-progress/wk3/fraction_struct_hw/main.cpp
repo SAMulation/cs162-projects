@@ -1,7 +1,7 @@
 /*************************
  * Name: Fraction Struct
  * Author: Sam Sarsten
- * Date: 01-08-2022
+ * Date: 01-08-2023
  * Purpose: Implementing Fraction struct using C++
 **************************/
 
