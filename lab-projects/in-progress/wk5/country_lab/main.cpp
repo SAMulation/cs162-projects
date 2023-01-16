@@ -12,8 +12,6 @@
 using namespace std;
 
 class Country {
-
-
     public:
         // Default constructor
         Country() {
