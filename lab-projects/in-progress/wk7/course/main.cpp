@@ -28,7 +28,7 @@ int main()
     course1.addStudent(student3);
 
     // Displaying the information of the course
-    cout << "Information of course 1:" << endl;
+    cout << "Information about course 1:" << endl;
     cout << course1 << endl;
     
     // Creating another object of Course class
@@ -40,12 +40,13 @@ int main()
         cout << "Yes" << endl;
     else
         cout << "No" << endl;
+    cout << endl << endl;
 
     // Adding the students from one course to another
     course2 += course1;
 
     // Displaying the information of the updated course
-    cout << "Information of course 2 after adding students from course 1: " << endl;
+    cout << "Information about course 2 after adding students from course 1: " << endl;
     cout << course2 << endl;
     
     return 0;
