@@ -25,14 +25,18 @@ struct Course {
 class Student {
     public:
         // Default constructor
-        Student() {
-            name = {"", ""};
+        Student()
+        {
+            name.first = "";
+            name.last = "";
             idNo = 0;
             numCourses = 0;
         }
 
-        Student(string f, string l) : name({f, l})
+        Student(string f, string l)
         {
+            name.first = f;
+            name.last = l;
             idNo = 0;
             numCourses = 0;
         }
@@ -40,48 +44,39 @@ class Student {
         // Accessor functions
         Name getName() const { return name; }
         int getIdNo() const { return idNo; }
-        Course getCourses() { return courses; }
+        int getNumCourses() const { return numCourses; }
+        Course getCourse(int index) const { return courses[index]; }
 
-        // Overloaded = operator
-        void operator=(const Account& rhs) {
-            account_number = rhs.account_number;
-            checking_balance = rhs.checking_balance;
-            savings_balance = rhs.savings_balance;
+        // Mutator functions
+        void setFirstName(string firstName) { name.first = firstName; return; }
+        void setLastName(string lastName) { name.last = lastName; return; }
+        void setIdNo(int id) { idNo = id; return; }
+        void addCourse(Course c) {
+            if (numCourses < MAX_COURSES)
+            {
+                courses[numCourses].discipline = c.discipline;
+                courses[numCourses].number = c.number;
+                numCourses++;
+            }
+            return;
         }
 
-        // Overloaded == operator
-        bool operator==(const Account& rhs) const {
-            return account_number == rhs.account_number;
+        // Member Functions
+        void deleteCourse(int courseNumber) {
+            for (int i = 0; i < numCourses; i++)
+            {
+                if (courses[i].number == courseNumber)
+                {
+                    for (int j = i; j < numCourses - 1; j++)
+                        // Shift courses down an index
+                        courses[j] = courses[j + 1];
+                    numCourses--;
+                    break;
+                }
+            }
+            return;
         }
 
-        // Overloaded < operator
-        bool operator<(const Account& rhs) const {
-            double account1_total = checking_balance + savings_balance;
-            double account2_total = rhs.checking_balance + rhs.savings_balance;
-            return account1_total < account2_total;
-        }
-
-        // Overloaded > operator
-        bool operator>(const Account& rhs) const {
-            double account1_total = checking_balance + savings_balance;
-            double account2_total = rhs.checking_balance + rhs.savings_balance;
-            return account1_total > account2_total;
-        }
-
-        // Overloaded <= operator
-        bool operator<=(const Account& rhs) const {
-            double account1_total = checking_balance + savings_balance;
-            double account2_total = rhs.checking_balance + rhs.savings_balance;
-            return account1_total <= account2_total;
-        }
-
-        // Overloaded >= operator
-        bool operator>=(const Account& rhs) const {
-            double account1_total = checking_balance + savings_balance;
-            double account2_total = rhs.checking_balance + rhs.savings_balance;
-            return account1_total >= account2_total;
-        }
-        
     private:
         Name name;
         int idNo;
@@ -89,65 +84,58 @@ class Student {
         int numCourses;
 };
 
-void testing_functions(const Account&, const Account&);
+int main()
+{
+    Student students[3];
+    students[0].setFirstName("Bugs");
+    students[0].setLastName("Bunny");
+    students[0].setIdNo(45678);
+    Course c1 = { "CS", 162 };
+    Course c2 = { "MATH", 101 };
+    students[0].addCourse(c1);
+    students[0].addCourse(c2);
 
-int main() {
-    // Create two Account objects
-    Account account1(1111111, 2500, 1000);
-    Account account2(2222222, 1500, 500);
+    students[1].setFirstName("Daffy");
+    students[1].setLastName("Duck");
+    students[1].setIdNo(87654);
+    Course c3 = { "BIO", 221 };
+    students[1].addCourse(c3);
 
-    testing_functions(account1, account2); // Should not be equal
+    students[2].setFirstName("Minnie");
+    students[2].setLastName("Mouse");
+    students[2].setIdNo(65748);
+    Course c4 = { "HIST", 105 };
+    Course c5 = { "PHIL", 201 };
+    students[2].addCourse(c4);
+    students[2].addCourse(c5);
 
-    // Test overloaded = operator
-    account1 = account2;
-    cout << fixed << showpoint << setprecision(2);
-    cout << "Account1's account number after using = operator: " << account1.get_account_number() << endl; // Should print 2222222
-    cout << "Account1's checking balance after using = operator: $" << account1.get_checking_balance() << endl; // Should print 1500.00
-    cout << "Account1's savings balance after using = operator: $" << account1.get_savings_balance() << endl << endl; // Should print 500.00
+    for (int i = 0; i < 3; i++)
+    {
+        cout << "Student " << i + 1 << " Name: " << students[i].getName().first << " " << students[i].getName().last << endl;
+        cout << "ID: " << students[i].getIdNo() << endl;
+        cout << "Courses:" << endl;
+        for (int j = 0; j < students[i].getNumCourses(); j++)
+        {
+            cout << '\t' << students[i].getCourse(j).discipline << " " << students[i].getCourse(j).number << endl;
+        }
+        cout << endl;
+    }
 
-    testing_functions(account1, account2); // Should be equal
+    students[0].deleteCourse(c1.number);
+    students[2].deleteCourse(c4.number);
+    cout << "After removing courses:" << endl << endl;
+
+    for (int i = 0; i < 3; i++)
+    {
+        cout << "Student " << i + 1 << " Name: " << students[i].getName().first << " " << students[i].getName().last << endl;
+        cout << "ID: " << students[i].getIdNo() << endl;
+        cout << "Courses:" << endl;
+        for (int j = 0; j < students[i].getNumCourses(); j++)
+        {
+            cout << '\t' << students[i].getCourse(j).discipline << " " << students[i].getCourse(j).number << endl;
+        }
+        cout << endl;
+    }
 
     return 0;
-}
-
-void testing_functions(const Account& account1, const Account& account2)
-{
-    // Test overloaded == operator
-    if (account1 == account2) {
-        cout << "Account1 and account2 have the same account number" << endl;
-    } else {
-        cout << "Account1 and account2 have different account numbers" << endl;
-    }
-
-    // Test overloaded < operator
-    if (account1 < account2) {
-        cout << "Account1's total balance is less than account2's total balance" << endl;
-    } else {
-        cout << "Account1's total balance is not less than account2's total balance" << endl;
-    }
-
-    // Test overloaded > operator
-    if (account1 > account2) {
-        cout << "Account1's total balance is greater than account2's total balance" << endl;
-    } else {
-        cout << "Account1's total balance is not greater than account2's total balance" << endl;
-    }
-
-    // Test overloaded <= operator
-    if (account1 <= account2) {
-        cout << "Account1's total balance is less than or equal to account2's total balance" << endl;
-    } else {
-        cout << "Account1's total balance is not less than or equal to account2's total balance" << endl;
-    }
-
-    // Test overloaded >= operator
-    if (account1 >= account2) {
-        cout << "Account1's total balance is greater than or equal to account2's total balance" << endl;
-    } else {
-        cout << "Account1's total balance is not greater than or equal to account2's total balance" << endl;
-    }
-
-    cout << endl;
-
-    return;
 }
