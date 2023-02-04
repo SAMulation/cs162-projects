@@ -4,7 +4,7 @@
 
 class FirePokemon : public Pokemon {
     public:
-        FirePokemon(int, string, int, int, string, int);
+        FirePokemon(int, string, int, int, int);
         int getFlamePower() const { return flamePower; };
         void print() const;
 
