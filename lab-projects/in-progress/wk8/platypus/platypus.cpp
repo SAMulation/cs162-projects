@@ -18,7 +18,8 @@ void Platypus::print() {
 // Age function
 void Platypus::ageMe() {
     // Check if the platypus is alive
-    if (alive) {
+    if (alive)
+    {
         // Increase the age of the platypus by 1
         age++;
         // Generate a random number between 1 and 100
@@ -40,27 +41,33 @@ void Platypus::ageMe() {
 
 // Fight function
 void Platypus::fight(Platypus &p) {
-    if (alive && p.alive) {
+    if (alive && p.alive)
+    {
         // Calculate the fight ratio based on the weight of each platypus
         float fightRatio = (weight / p.weight) * 50;
         // Generate a random number between 1 and 100
         int result = rand() % 100 + 1;
         // Compare the fight ratio with the random number
-        if (result < fightRatio) {
+        if (result < fightRatio)
+        {
             // If the random number is smaller, set the first platypus to alive and the second to dead
             alive = true;
             p.alive = false;
-        } else {
+        }
+        else
+        {
             // If the random number is bigger, set the first platypus to dead and the second to alive
             alive = false;
             p.alive = true;
         }
     }
+    return;
 }
 
 // Eat function
 void Platypus::eat() {
-    if (alive) {
+    if (alive)
+    {
         // Generate number between 1 and 50
         int random = rand() % 50 + 1;
         weight += weight * (random / 10);
@@ -83,18 +90,18 @@ void Platypus::hatch() {
 string Platypus::getRandomName(char gender) {
     vector<string> names;
     ifstream nameFile;
-    if (gender == 'm') {
+    if (gender == 'm')
         nameFile.open("m_names.txt");
-    } else if (gender == 'f') {
+    else if (gender == 'f')
         nameFile.open("f_names.txt");
-    }
-    if (!nameFile.is_open()) {
+
+    if (!nameFile.is_open())
         return "";
-    }
+
     string name;
-    while (nameFile >> name) {
+    while (nameFile >> name)
         names.push_back(name);
-    }
+
     nameFile.close();
     int randomIndex = rand() % names.size();
     return names[randomIndex];

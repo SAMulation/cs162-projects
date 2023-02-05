@@ -30,43 +30,49 @@ int main() {
 
     cout << endl << "Now let's hatch some more platypi..." << endl << endl;
 
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 10; i++)
+    {
         Platypus p;
         p.hatch();
         platypi.push_back(p);
     }
 
     cout << endl << "All platypi: " << endl;
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 10; i++)
+    {
         cout << "Platypus " << i + 1 << ": " << endl;
         platypi[i].print();
         cout << endl;
     }
     
     cout <<  endl <<"Now let's make our platypi grow and see what happens..." << endl << endl;
-    for (int i = 0; i < 100; i++) {
-        for (int j = 0; j < 10; j++) {
+    for (int i = 0; i < 100; i++)
+    {
+        for (int j = 0; j < 10; j++)
+        {
             platypi[j].ageMe();
             platypi[j].eat();
         }
     }
 
     cout << "All platypi after aging and eating..." << endl << endl;
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 10; i++)
+    {
         cout << "Platypus " << i + 1 << ": " << endl;
         platypi[i].print();
         cout << endl;
     }
 
     cout << endl << "Now let's make our platypi fight!!!" << endl << endl;
-    for (int i = 0; i < 10; i++) {
-        for (int j = i + 1; j < 10; j++) {
+    for (int i = 0; i < 10; i++)
+    {
+        for (int j = i + 1; j < 10; j++)
             platypi[i].fight(platypi[j]);
-        }
     }
 
     cout << "All platypi after fighting..." << endl << endl;
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 10; i++)
+    {
         cout << "Platypus " << i + 1 << ": " << endl;
         platypi[i].print();
         cout << endl;
