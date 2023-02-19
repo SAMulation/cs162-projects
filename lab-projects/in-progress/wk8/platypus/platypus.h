@@ -19,6 +19,8 @@ class Platypus {
         void eat();
         void hatch();
         string getRandomName(char gender);
+        bool getAlive() const { return alive; }
+        bool getMutant() const { return mutant; }
 
     private:
         float weight;

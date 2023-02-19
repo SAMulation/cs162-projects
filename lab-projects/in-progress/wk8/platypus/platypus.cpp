@@ -31,6 +31,8 @@ void Platypus::ageMe() {
         // Generate a random number between 1 and 100
         chance = rand() % 100 + 1;
         // Check if the random number is less than or equal to the weight of the platypus times 10
+        cout << "Weight * 10: " << weight * 10 << endl;
+        cout << "Gonna die? " << (chance <= weight * 10);
         if (chance <= weight * 10)
             // If it is, set the platypus to be dead
             alive = false;
@@ -50,15 +52,13 @@ void Platypus::fight(Platypus &p) {
         // Compare the fight ratio with the random number
         if (result < fightRatio)
         {
-            // If the random number is smaller, set the first platypus to alive and the second to dead
-            alive = true;
+            // If the random number is smaller, set the other platypus to dead
             p.alive = false;
         }
         else
         {
-            // If the random number is bigger, set the first platypus to dead and the second to alive
+            // If the random number is bigger, set the calling platypus to dead
             alive = false;
-            p.alive = true;
         }
     }
     return;
